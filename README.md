@@ -1,2 +1,5 @@
 # json-diff
-console tool which produces colorized diff of two JSON files
+A console program to produce colorized diff of two JSON files
+
+## Usage:
+`json-diff <file1.json> <file2.json>`
