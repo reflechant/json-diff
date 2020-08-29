@@ -8,17 +8,17 @@
 
 (defn open-parse
   "open JSON file and parses it"
-  [fn]
-  (with-open [f (io/reader fn)]
+  [file-name]
+  (with-open [f (io/reader file-name)]
     (json/read f)))
 
 (defn diff
   "returns diff between JSON files"
-  [fn1 fn2]
+  [file-name1 file-name2]
   (let [c1 (chan)
         c2 (chan)]
-    (go (>! c1 (open-parse fn1)))
-    (go (>! c2 (open-parse fn2)))
+    (go (>! c1 (open-parse file-name1)))
+    (go (>! c2 (open-parse file-name2)))
     (ddiff/diff (<!! c1) (<!! c2))))
 
 (defn -main
