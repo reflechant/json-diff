@@ -7,13 +7,13 @@
 
 
 (defn diff
-  "prints diff between JSON files"
+  "returns diff between JSON files"
   [fn1 fn2]
   (with-open [file1 (io/reader fn1)
               file2 (io/reader fn2)]
     (let [json1 (json/read file1)
           json2 (json/read file2)]
-      (ddiff/pretty-print (ddiff/diff json1 json2)))))
+      (ddiff/diff json1 json2))))
 
 (defn -main
   "Main function"
@@ -22,4 +22,4 @@
     (println "Not enough parameters!")
     (let [fn1 (first args)
           fn2 (second args)]
-      (diff fn1 fn2))))
+      (ddiff/pretty-print (diff fn1 fn2)))))
