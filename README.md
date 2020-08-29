@@ -4,7 +4,7 @@ A console program to produce colorized diff of two JSON files
 
 ## Usage
 
-    $ java -jar json-diff-0.1.1.jar file1.json file2.json
+    $ java -jar json-diff.jar file1.json file2.json
 
 ## License
 
