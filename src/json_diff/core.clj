@@ -22,7 +22,7 @@
     (ddiff/diff (<!! c1) (<!! c2))))
 
 (defn -main
-  "Main function"
+  "main function"
   [& args]
   (if (> 2 (count args))
     (println "Not enough parameters!")

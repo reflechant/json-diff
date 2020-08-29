@@ -6,7 +6,8 @@
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [lambdaisland/deep-diff2 "2.0.108"]
                  [org.clojure/data.json "1.0.0"]
-                 [org.clojure/core.async "1.3.610"]]
+                 [org.clojure/core.async "1.3.610"]
+                 [juji/editscript "0.4.6"]]
   :main ^:skip-aot json-diff.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
