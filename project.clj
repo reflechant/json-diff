@@ -1,4 +1,4 @@
-(defproject json-diff "0.1.0-SNAPSHOT"
+(defproject json-diff "0.1.1"
   :description "A console program to produce colorized diff of two JSON files"
   :url "https://github.com/reflechant/json-diff"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
