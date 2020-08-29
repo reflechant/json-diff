@@ -1,6 +1,6 @@
 # json-diff
 
-A console program to produce colorized diff of two JSON files
+A console program to produce colorized **structural diff** of two JSON files
 
 ## Usage
 
