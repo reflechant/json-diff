@@ -1,6 +1,5 @@
 (ns json-diff.core
   (:require [clojure.data.json :as json]
-            [clojure.core.async :refer [>! <!! go chan]]
             [lambdaisland.deep-diff2 :as ddiff]
             [clojure.java.io :as io])
   (:gen-class))
@@ -15,11 +14,9 @@
 (defn diff
   "returns diff between JSON files"
   [file-name1 file-name2]
-  (let [c1 (chan)
-        c2 (chan)]
-    (go (>! c1 (open-parse file-name1)))
-    (go (>! c2 (open-parse file-name2)))
-    (ddiff/diff (<!! c1) (<!! c2))))
+  (let [json1 (future (open-parse file-name1))
+        json2 (future (open-parse file-name2))]
+    (ddiff/diff @json1 @json2)))
 
 (defn -main
   "Main function"
