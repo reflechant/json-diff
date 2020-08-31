@@ -1,10 +1,16 @@
 # json-diff
 
-A console program to produce colorized **structural diff** of two JSON files
+A console program to produce **structural diff** of two JSON files
 
 ## Usage
 
-    $ java -jar json-diff.jar file1.json file2.json
+    $ java -jar json-diff.jar [-m {visual|patch}] file1.json file2.json
+
+`-m` or `--mode` lets you choose output format.
+
+`visual` prints **all** JSON, marking difference in-place. It's made with [deep-diff2](https://github.com/lambdaisland/deep-diff2).
+
+`patch` prints the minimal necessary changes needed to make file2 from file1. It's made with [editscript](https://github.com/juji-io/editscript).
 
 ## License
 

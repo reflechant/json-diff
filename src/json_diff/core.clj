@@ -1,5 +1,6 @@
 (ns json-diff.core
-  (:require [clojure.java.io :as io]
+  (:require [clojure.string :as str]
+            [clojure.java.io :as io]
             [clojure.data.json :as json]
             [clojure.core.async :refer [>! <!! go chan]]
             [clojure.tools.cli :refer [parse-opts]]
@@ -51,7 +52,7 @@
          errors :errors
          {:keys [mode]} :options} (parse-opts args cli-options)]
     (cond
-      errors (print-error-exit (str errors) 1)
+      errors (print-error-exit (str/join "\n" errors) 1)
       (not= 2 (count files)) (print-error-exit "you need to pass two JSON files!" 1)
       (= :visual mode) (apply process diff files)
       (= :patch mode) (apply process patch files))))
