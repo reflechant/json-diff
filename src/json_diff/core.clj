@@ -1,11 +1,11 @@
 (ns json-diff.core
-  (:require [clojure.data.json :as json]
+  (:require [clojure.java.io :as io]
+            [clojure.data.json :as json]
             [clojure.core.async :refer [>! <!! go chan]]
+            [clojure.tools.cli :refer [parse-opts]]
             [lambdaisland.deep-diff2 :as ddiff]
-            [clojure.java.io :as io]
-            [editscript.core :as edcore]
-            ;; [editscript.edit :as edit]
-            [clojure.tools.cli :refer [parse-opts]])
+            [editscript.core :refer [diff] :rename {diff compact-diff}])
+
   (:gen-class))
 
 (def cli-options
@@ -14,34 +14,35 @@
     :parse-fn #(keyword %)
     :validate [#(% #{:visual :patch}) "possible modes are 'visual' or 'patch'"]]])
 
-(defn parse
-  "opens JSON file and parses it"
-  [file-name]
-  (with-open [f (io/reader file-name)]
-    (json/read f)))
-
 (defn parse-async
   "opens JSON file and parses it asynchronously, returns channel"
   [file-name]
-  (go (parse file-name)))
+  (go (with-open [f (io/reader file-name)]
+        (json/read f))))
 
 (defn process
   [f & files]
   (->> files
        (map parse-async)
-       (map #(<!! %))
-       (map f)))
+       (map <!!)
+       (apply f)))
 
 (defn patch
-  "returns compact patch between two JSON objects"
+  "prints compact patch between two JSON objects"
   [left right]
-  (println (edcore/diff left right {:algo :quick})))
+  (println (compact-diff left right {:algo :quick})))
 
 (defn diff
-  "returns visual diff between two JSON objects"
+  "prints visual diff between two JSON objects"
   [left right]
   (ddiff/pretty-print
    (ddiff/diff left right)))
+
+(defn print-error-exit
+  "prints error message and exits with error code"
+  [msg code]
+  (println msg)
+  (System/exit code))
 
 (defn -main
   "main function"
@@ -50,9 +51,7 @@
          errors :errors
          {:keys [mode]} :options} (parse-opts args cli-options)]
     (cond
-      errors (do (apply println errors)
-                 (System/exit 1))
-      (not= 2 (count files)) (do (println "you need to pass two JSON files!")
-                                   (System/exit 1))
+      errors (print-error-exit (str errors) 1)
+      (not= 2 (count files)) (print-error-exit "you need to pass two JSON files!" 1)
       (= :visual mode) (apply process diff files)
       (= :patch mode) (apply process patch files))))
