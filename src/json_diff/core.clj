@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]
             [clojure.java.io :as io]
             [clojure.data.json :as json]
-            [clojure.core.async :refer [>! <!! go chan]]
+            [clojure.core.async :refer [<!! go]]
             [clojure.tools.cli :refer [parse-opts]]
             [lambdaisland.deep-diff2 :as ddiff]
             [editscript.core :refer [diff] :rename {diff compact-diff}])
