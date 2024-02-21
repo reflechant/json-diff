@@ -1,6 +1,6 @@
 # json-diff
 
-A console program to produce **structural diff** of two JSON files
+A CLI tool to produce **structural diff** of two JSON files
 
 ## Usage
 
