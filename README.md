@@ -12,6 +12,10 @@ A CLI tool to produce **structural diff** of two JSON files
 
 `patch` prints the minimal necessary changes needed to make file2 from file1. It's made with [editscript](https://github.com/juji-io/editscript).
 
+## Screenshots
+
+![json-diff in visual and patch modes](/../screenshots/screenshots/json-diff in action.png?raw=true "json-diff in action")
+
 ## License
 
 Copyright © 2020 Roman Gerasimov
