@@ -14,7 +14,7 @@ A CLI tool to produce **structural diff** of two JSON files
 
 ## Screenshots
 
-![json-diff in visual and patch modes]([/../screenshots/screenshots/json-diff in action.png](https://raw.githubusercontent.com/reflechant/json-diff/screenshots/screenshots/json-diff%20in%20action.png)?raw=true "json-diff in action")
+![json-diff in visual and patch modes](https://raw.githubusercontent.com/reflechant/json-diff/screenshots/screenshots/json-diff%20in%20action.png)
 
 ## License
 
